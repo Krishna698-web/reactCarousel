@@ -1,33 +1,33 @@
 import React, { createContext, useState } from "react";
-import ladakh from "../images/ladakh.jpg";
-import sleepingChild from "../images/sleeping_child.jpg";
+import elephants from "../images/elephants.jpg";
+import robots from "../images/robots.jpg";
 import lonelyGirl from "../images/lonely-girl.jpg";
-import child from "../images/child.jpg";
-import hillHouse from "../images/hill_house.jpg";
-import beach from "../images/beach.jpg";
-import blueCity from "../images/blue_city.jpg";
+import family from "../images/family.jpg";
+import waterfall from "../images/waterfall.jpg";
+import baby from "../images/baby.jpg";
+import blueCity from "../images/jodhpur.jpg";
 import kerala from "../images/kerala.jpg";
 
 const CardContext = createContext();
 
 const CardContextProvider = ({ children }) => {
-  const [isPlaying, stIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const [selectedCard, setSelectedCard] = useState("");
   const CARD_DATA = [
     {
       id: "c1",
-      src: ladakh,
+      src: waterfall,
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      title: "Ladakh",
+      title: "Beauty of Earth",
     },
     {
       id: "c2",
-      src: sleepingChild,
+      src: robots,
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      title: "Child at sleep",
+      title: "Robots family",
     },
     {
       id: "c3",
@@ -38,24 +38,24 @@ const CardContextProvider = ({ children }) => {
     },
     {
       id: "c4",
-      src: child,
+      src: family,
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      title: "Child",
+      title: "Happy Family",
     },
     {
       id: "c5",
-      src: hillHouse,
+      src: baby,
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      title: "Hill station",
+      title: "Sleeping Baby",
     },
     {
       id: "c6",
-      src: beach,
+      src: elephants,
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      title: "Beach",
+      title: "The mama Elephant and its baby",
     },
     {
       id: "c7",
@@ -81,7 +81,14 @@ const CardContextProvider = ({ children }) => {
 
   return (
     <CardContext.Provider
-      value={{ CARD_DATA, selectedCardHandler, selectedCard, isPlaying }}>
+      value={{
+        CARD_DATA,
+        selectedCardHandler,
+        selectedCard,
+        isPlaying,
+        setSelectedCard,
+        setIsPlaying,
+      }}>
       {children}
     </CardContext.Provider>
   );

@@ -4,14 +4,26 @@ import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 
 import { CardContext } from "../use-content/CardContext";
 
+// import styles from
 const ImageCard = () => {
-  const { CARD_DATA, selectedCard, isPlaying } = useContext(CardContext);
+  const { CARD_DATA, selectedCard, isPlaying, setSelectedCard } =
+    useContext(CardContext);
 
+  let slideIndex = 0;
   useEffect(() => {
-    let interval = setInterval(() => {}, 3000);
+    const interval = setInterval(() => {
+      if (slideIndex === CARD_DATA.length) {
+        slideIndex = 0;
+      } else {
+        if (isPlaying) {
+          setSelectedCard(CARD_DATA[slideIndex]);
+          slideIndex++;
+        }
+      }
+    }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [slideIndex, isPlaying]);
 
   return (
     <div>
@@ -19,16 +31,17 @@ const ImageCard = () => {
         <Card
           key={selectedCard.id}
           sx={{
-            height: { md: "100%", xs: "50%" },
-            width: { md: "80%", xs: "100%" },
+            height: { md: "35rem", sm: "35rem" },
+            width: { md: "100%", xs: "100%" },
             display: "flex",
-            flexDirection: { xs: "column", md: "row", sm: "row" },
+            flexDirection: { md: "row", sm: "column", xs: "column" },
+            mb: 2,
           }}>
           <CardMedia
             image={selectedCard.src}
-            sx={{ height: { sx: "50%" }, width: "69%" }}
+            sx={{ height: "100%", width: "100%" }}
           />
-          <CardContent sx={{ width: "30%" }}>
+          <CardContent sx={{ width: { md: "50%", xs: "100%" }, py: 3 }}>
             <Typography variant="h4">{selectedCard.title}</Typography>
             <Typography>{selectedCard.description}</Typography>
           </CardContent>
