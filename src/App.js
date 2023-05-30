@@ -1,23 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import ImageCard from "./Component/ImageCard";
+import "./App.css";
+import Carousel from "./Component/Carousel";
+import { Stack } from "@mui/material";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Stack
+        direction={{ sm: "column" }}
+        spacing={{ xs: 1, sm: 2, md: 4 }}
+        sx={{ width: "100%", p: 1 }}
+        useFlexGap>
+        <ImageCard />
+        <Carousel />
+      </Stack>
     </div>
   );
 }
