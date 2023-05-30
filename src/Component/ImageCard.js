@@ -1,11 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 
 import { CardContext } from "../use-content/CardContext";
 
 const ImageCard = () => {
-  const { CARD_DATA, selectedCard } = useContext(CardContext);
+  const { CARD_DATA, selectedCard, isPlaying } = useContext(CardContext);
+
+  useEffect(() => {
+    let interval = setInterval(() => {}, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div>
       {selectedCard ? (

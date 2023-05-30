@@ -11,6 +11,8 @@ import kerala from "../images/kerala.jpg";
 const CardContext = createContext();
 
 const CardContextProvider = ({ children }) => {
+  const [isPlaying, stIsPlaying] = useState(false);
+
   const [selectedCard, setSelectedCard] = useState("");
   const CARD_DATA = [
     {
@@ -79,7 +81,7 @@ const CardContextProvider = ({ children }) => {
 
   return (
     <CardContext.Provider
-      value={{ CARD_DATA, selectedCardHandler, selectedCard }}>
+      value={{ CARD_DATA, selectedCardHandler, selectedCard, isPlaying }}>
       {children}
     </CardContext.Provider>
   );
