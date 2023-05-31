@@ -52,10 +52,10 @@ const Carousel = () => {
 
   cardRef.current.forEach((card, index) => {
     card.style.transform = `translateX(${index * 110}%)`;
-    if (!isSelected) {
-      card.style.filter = "grayscale(100%)";
-    } else {
+    if (isSelected) {
       card.style.filter = "grayscale(0%)";
+    } else {
+      card.style.filter = "grayscale(100%)";
     }
   });
 
