@@ -35,7 +35,8 @@ const ImageCard = () => {
             width: { md: "100%", xs: "100%" },
             display: "flex",
             flexDirection: { md: "row", sm: "column", xs: "column" },
-            mb: 2,
+            my: 2,
+            transition: ".4s",
           }}>
           <CardMedia
             image={selectedCard.src}
@@ -52,5 +53,4 @@ const ImageCard = () => {
     </div>
   );
 };
-
 export default ImageCard;

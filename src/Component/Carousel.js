@@ -17,8 +17,18 @@ import PlayPause from "./PlayPause";
 const Carousel = () => {
   const [isClicked, setIsClicked] = useState(false);
   const { CARD_DATA, selectedCardHandler } = useContext(CardContext);
-  // const cardsRef = useRef(null);
+  const cardsRef = useRef([]);
+
+  useEffect(() => {
+    cardsRef.current.forEach((card, index) => {
+      card.style.transform = `translateX(${(index - currentSlide) * 110}%)`;
+    });
+  }, [CARD_DATA]);
+
   // console.log(cardsRef.current.children);
+
+  // const [cardIndex, setCardIndex] = useState(0);
+
   const cards = document.querySelectorAll(".card");
   let currentSlide = 0;
   const forwards = () => {
@@ -45,13 +55,23 @@ const Carousel = () => {
 
   cards.forEach((card, index) => {
     card.style.transform = `translateX(${index * 110}%)`;
+    if (!isClicked) {
+      card.style.filter = "grayscale(100%)";
+    } else {
+      card.style.filter = "grayscale(0%)";
+    }
   });
 
+  const selectCardHandler = (cardId) => {
+    selectedCardHandler(cardId);
+    setIsClicked(true);
+  };
+
   return (
-    <Container className={styles.container} maxWidth="xl">
+    <Box className={styles.container} maxWidth="xl">
       <Box className={styles.carousel_container}>
         <Box>
-          {CARD_DATA.map((card) => (
+          {CARD_DATA.map((card, index) => (
             <Card
               key={card.id}
               className="card"
@@ -64,9 +84,16 @@ const Carousel = () => {
                 top: "10%",
                 transition: ".4s",
               }}
-              onClick={() => selectedCardHandler(card.id)}>
+              ref={(el) => (cardsRef.current[index] = el)}
+              onClick={() => selectCardHandler(card.id)}>
               <CardActionArea>
-                <CardMedia image={card.src} sx={{ height: 120, width: 170 }} />
+                <CardMedia
+                  image={card.src}
+                  sx={{
+                    height: 120,
+                    width: 170,
+                  }}
+                />
               </CardActionArea>
             </Card>
           ))}
@@ -89,7 +116,7 @@ const Carousel = () => {
         </Box>
       </Box>
       <PlayPause />
-    </Container>
+    </Box>
   );
 };
 

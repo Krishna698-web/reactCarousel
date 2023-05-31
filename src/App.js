@@ -14,7 +14,6 @@ function App() {
         useFlexGap>
         <ImageCard />
         <Carousel />
-        {/* <PlayPause /> */}
       </Container>
     </div>
   );

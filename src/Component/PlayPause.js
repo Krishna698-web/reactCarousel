@@ -11,16 +11,16 @@ const PlayPause = () => {
   return (
     <IconButton onClick={() => setIsPlaying(!isPlaying)}>
       {!isPlaying ? (
-        <PauseCircleFilledIcon
-          sx={{ fontSize: "5rem" }}
-          color="primary"
-          className={styles.pauseButton}
-        />
-      ) : (
         <PlayCircleFilledWhiteIcon
           sx={{ fontSize: "5rem" }}
           color="primary"
           className={styles.playButton}
+        />
+      ) : (
+        <PauseCircleFilledIcon
+          sx={{ fontSize: "5rem" }}
+          color="primary"
+          className={styles.pauseButton}
         />
       )}
     </IconButton>
