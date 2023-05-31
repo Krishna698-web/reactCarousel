@@ -41,3 +41,11 @@
   height: 6rem;
   width: 7rem;
 }
+
+.not_active {
+  filter: grayscale(100%);
+}
+
+.active {
+  filter: grayscale(0%);
+}

@@ -1,13 +1,5 @@
-import {
-  Box,
-  Button,
-  Card,
-  CardActionArea,
-  CardMedia,
-  Container,
-  IconButton,
-} from "@mui/material";
-import React, { memo, useContext, useEffect, useRef, useState } from "react";
+import { Box, IconButton } from "@mui/material";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { CardContext } from "../use-context/CardContext";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
@@ -16,18 +8,17 @@ import styles from "./Carousel.module.css";
 import PlayPause from "./PlayPause";
 import SingleCard from "./SingleCard";
 const Carousel = () => {
-  const [isSelected, setIsSelected] = useState(false);
   const { CARD_DATA, selectedCardHandler } = useContext(CardContext);
   const cardRef = useRef([]);
+  let currentSlide = 0;
 
   useEffect(() => {
     cardRef.current.forEach((card, index) => {
       card.style.transform = `translateX(${(index - currentSlide) * 110}%)`;
     });
-    console.log(cardRef.current);
-  }, [CARD_DATA]);
+    // console.log(cardRef.current);
+  }, [CARD_DATA, currentSlide]);
 
-  let currentSlide = 0;
   const forwards = () => {
     if (currentSlide === CARD_DATA.length - 3) {
       currentSlide = 0;
@@ -50,18 +41,8 @@ const Carousel = () => {
     });
   };
 
-  cardRef.current.forEach((card, index) => {
-    card.style.transform = `translateX(${index * 110}%)`;
-    if (isSelected) {
-      card.style.filter = "grayscale(0%)";
-    } else {
-      card.style.filter = "grayscale(100%)";
-    }
-  });
-
-  const selectCardHandler = (cardId) => {
+  const cardSelectionHandler = (cardId) => {
     selectedCardHandler(cardId);
-    setIsSelected(true);
   };
 
   return (
@@ -70,8 +51,9 @@ const Carousel = () => {
         <Box>
           {CARD_DATA.map((card, index) => (
             <SingleCard
+              key={card.id}
               card={card}
-              onCardSelection={selectCardHandler}
+              onCardSelection={cardSelectionHandler}
               ref={cardRef}
               index={index}
             />

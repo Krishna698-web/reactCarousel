@@ -12,6 +12,7 @@ const CardContext = createContext();
 
 const CardContextProvider = ({ children }) => {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isSelected, setIsSelected] = useState(false);
 
   const [selectedCard, setSelectedCard] = useState("");
   const CARD_DATA = [
@@ -76,6 +77,7 @@ const CardContextProvider = ({ children }) => {
   const selectedCardHandler = (cardId) => {
     const theCard = CARD_DATA.filter((card) => card.id === cardId);
     setSelectedCard(...theCard);
+    setIsSelected(!isSelected);
   };
 
   return (
@@ -87,6 +89,8 @@ const CardContextProvider = ({ children }) => {
         isPlaying,
         setSelectedCard,
         setIsPlaying,
+        isSelected,
+        setIsSelected,
       }}>
       {children}
     </CardContext.Provider>
