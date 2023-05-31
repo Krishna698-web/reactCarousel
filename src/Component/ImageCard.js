@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 
-import { CardContext } from "../use-content/CardContext";
+import { CardContext } from "../use-context/CardContext";
 
 // import styles from
 const ImageCard = () => {
@@ -20,7 +20,7 @@ const ImageCard = () => {
           slideIndex++;
         }
       }
-    }, 1000);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, [slideIndex, isPlaying]);
@@ -39,8 +39,10 @@ const ImageCard = () => {
             transition: ".4s",
           }}>
           <CardMedia
+            component="img"
             image={selectedCard.src}
-            sx={{ height: "100%", width: "100%" }}
+            alt={selectedCard.title}
+            sx={{ height: "100%", width: { md: "60%", xs: "100%" } }}
           />
           <CardContent sx={{ width: { md: "50%", xs: "100%" }, py: 3 }}>
             <Typography variant="h4">{selectedCard.title}</Typography>

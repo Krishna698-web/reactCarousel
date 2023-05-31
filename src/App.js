@@ -10,8 +10,7 @@ function App() {
       <Container
         direction={{ sm: "column" }}
         spacing={{ xs: 1, sm: 2, md: 4 }}
-        sx={{ width: "100%", p: 1 }}
-        useFlexGap>
+        sx={{ width: "100%", p: 1 }}>
         <ImageCard />
         <Carousel />
       </Container>

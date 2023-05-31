@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { CardContext } from "../use-content/CardContext";
+import { CardContext } from "../use-context/CardContext";
 import PlayCircleFilledWhiteIcon from "@mui/icons-material/PlayCircleFilledWhite";
 import PauseCircleFilledIcon from "@mui/icons-material/PauseCircleFilled";
 import { IconButton } from "@mui/material";

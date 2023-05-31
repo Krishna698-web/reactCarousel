@@ -76,7 +76,6 @@ const CardContextProvider = ({ children }) => {
   const selectedCardHandler = (cardId) => {
     const theCard = CARD_DATA.filter((card) => card.id === cardId);
     setSelectedCard(...theCard);
-    // console.log(theCard);
   };
 
   return (

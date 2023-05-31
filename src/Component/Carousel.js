@@ -7,55 +7,52 @@ import {
   Container,
   IconButton,
 } from "@mui/material";
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { CardContext } from "../use-content/CardContext";
+import React, { memo, useContext, useEffect, useRef, useState } from "react";
+import { CardContext } from "../use-context/CardContext";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 import styles from "./Carousel.module.css";
 import PlayPause from "./PlayPause";
+import SingleCard from "./SingleCard";
 const Carousel = () => {
-  const [isClicked, setIsClicked] = useState(false);
+  const [isSelected, setIsSelected] = useState(false);
   const { CARD_DATA, selectedCardHandler } = useContext(CardContext);
-  const cardsRef = useRef([]);
+  const cardRef = useRef([]);
 
   useEffect(() => {
-    cardsRef.current.forEach((card, index) => {
+    cardRef.current.forEach((card, index) => {
       card.style.transform = `translateX(${(index - currentSlide) * 110}%)`;
     });
+    console.log(cardRef.current);
   }, [CARD_DATA]);
 
-  // console.log(cardsRef.current.children);
-
-  // const [cardIndex, setCardIndex] = useState(0);
-
-  const cards = document.querySelectorAll(".card");
   let currentSlide = 0;
   const forwards = () => {
-    if (currentSlide === cards.length - 3) {
+    if (currentSlide === CARD_DATA.length - 3) {
       currentSlide = 0;
     } else {
       currentSlide++;
     }
-    cards.forEach((card, index) => {
+    cardRef.current.forEach((card, index) => {
       card.style.transform = `translateX(${(index - currentSlide) * 110}%)`;
     });
   };
 
   const backwards = () => {
     if (currentSlide === 0) {
-      currentSlide = cards.length - 3;
+      currentSlide = CARD_DATA.length - 3;
     } else {
       currentSlide--;
     }
-    cards.forEach((card, index) => {
+    cardRef.current.forEach((card, index) => {
       card.style.transform = `translateX(${(index - currentSlide) * 110}%)`;
     });
   };
 
-  cards.forEach((card, index) => {
+  cardRef.current.forEach((card, index) => {
     card.style.transform = `translateX(${index * 110}%)`;
-    if (!isClicked) {
+    if (!isSelected) {
       card.style.filter = "grayscale(100%)";
     } else {
       card.style.filter = "grayscale(0%)";
@@ -64,7 +61,7 @@ const Carousel = () => {
 
   const selectCardHandler = (cardId) => {
     selectedCardHandler(cardId);
-    setIsClicked(true);
+    setIsSelected(true);
   };
 
   return (
@@ -72,30 +69,12 @@ const Carousel = () => {
       <Box className={styles.carousel_container}>
         <Box>
           {CARD_DATA.map((card, index) => (
-            <Card
-              key={card.id}
-              className="card"
-              sx={{
-                heigth: "100%",
-                borderRadius: 1,
-                width: "max-content",
-                display: "inline-block",
-                position: "absolute",
-                top: "10%",
-                transition: ".4s",
-              }}
-              ref={(el) => (cardsRef.current[index] = el)}
-              onClick={() => selectCardHandler(card.id)}>
-              <CardActionArea>
-                <CardMedia
-                  image={card.src}
-                  sx={{
-                    height: 120,
-                    width: 170,
-                  }}
-                />
-              </CardActionArea>
-            </Card>
+            <SingleCard
+              card={card}
+              onCardSelection={selectCardHandler}
+              ref={cardRef}
+              index={index}
+            />
           ))}
         </Box>
         <Box className={styles.btn_container}>
