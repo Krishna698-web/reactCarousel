@@ -7,8 +7,10 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import styles from "./Carousel.module.css";
 import PlayPause from "./PlayPause";
 import SingleCard from "./SingleCard";
+import { setSelectionRange } from "@testing-library/user-event/dist/utils";
 const Carousel = () => {
   const { CARD_DATA, selectedCardHandler } = useContext(CardContext);
+  const [selectedCard, setSelectedCard] = useState(null);
   const cardRef = useRef([]);
   let currentSlide = 0;
 
@@ -16,7 +18,6 @@ const Carousel = () => {
     cardRef.current.forEach((card, index) => {
       card.style.transform = `translateX(${(index - currentSlide) * 110}%)`;
     });
-    console.log(CARD_DATA);
   }, [CARD_DATA, currentSlide]);
 
   const forwards = () => {
@@ -42,6 +43,7 @@ const Carousel = () => {
   };
 
   const cardSelectionHandler = (cardId) => {
+    setSelectedCard(cardId);
     selectedCardHandler(cardId);
   };
 
@@ -54,6 +56,7 @@ const Carousel = () => {
               key={card.id}
               card={card}
               onCardSelection={cardSelectionHandler}
+              isSelected={selectedCard === card.id}
               ref={cardRef}
               index={index}
             />
