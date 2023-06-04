@@ -5,12 +5,12 @@ import { CardContext } from "../use-context/CardContext";
 
 const SingleCard = memo(
   React.forwardRef((props, ref) => {
-    const { isSelected } = useContext(CardContext);
-    console.log(isSelected);
     return (
       <div>
         <Card
-          className={`card ${isSelected ? styles.active : styles.not_active}`}
+          className={`card ${
+            props.card.selected ? styles.active : styles.not_active
+          }`}
           sx={{
             heigth: "100%",
             borderRadius: 1,

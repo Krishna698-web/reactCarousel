@@ -16,7 +16,7 @@ const Carousel = () => {
     cardRef.current.forEach((card, index) => {
       card.style.transform = `translateX(${(index - currentSlide) * 110}%)`;
     });
-    // console.log(cardRef.current);
+    console.log(CARD_DATA);
   }, [CARD_DATA, currentSlide]);
 
   const forwards = () => {
